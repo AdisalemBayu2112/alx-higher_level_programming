@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # Python program to print list
-# without using loop
+# by using loop
 
-def print_list_integer(my_list=[]): 
-    my_list = [1, 2, 3, 4, 5]
-    print(*my_list, sep = "\n")
+def print_list_integer(my_list=[]):
+    for i in range(len(my_list)):
+        print("{:d}".format(my_list[i]))
