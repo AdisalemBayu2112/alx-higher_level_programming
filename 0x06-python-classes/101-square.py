@@ -1,97 +1,93 @@
 #!/usr/bin/python3
-""" class Square that defines a square"""
+"""
+This is module 6-square
+It defines a class that defines a Square
+"""
 
 
 class Square:
-    """ class Square that defines a square"""
+    """
+    This class Square takes two private attributes:
+    size (int): len of one side
+    position (tuple): top left corner
+    Example:
+    x = Square(2)
+    """
     def __init__(self, size=0, position=(0, 0)):
-        """ init square
-        Args:
-            value (int): size of the square.
-            position (tuple): position of the square
+        """
+        Instantiate a Square object
+        Arguments:
+            size (int): len of size of square
+            position (tuple): position to print
         """
         self.size = size
         self.position = position
 
     @property
     def size(self):
-        """int: private size.
-        Returns:
-            Private size.
+        """
+        getter for size
         """
         return self.__size
 
+    @size.setter
+    def size(self, value):
+        """
+        setter for size
+        Check if the input value is a positive or null
+        """
+        if type(value) is not int:
+            raise TypeError("size must be an integer")
+        if value < 0:
+            raise ValueError("size must be >= 0")
+        self.__size = value
+
     @property
     def position(self):
-        """tuple position"""
-
+        """
+        getter for position
+        """
         return self.__position
 
     @position.setter
     def position(self, value):
-        """ set posotion of the square
-        Args:
-            value (tuple): position
         """
-        if type(value) is not tuple:
-            raise TypeError('position must be a tuple of 2 positive integers')
-        elif len(value) is not 2:
-            raise TypeError('position must be a tuple of 2 positive integers')
-        elif type(value[0]) is not int or type(value[1]) is not int:
-            raise TypeError('position must be a tuple of 2 positive integers')
-        elif value[0] < 0 or value[1] < 0:
-            raise TypeError('position must be a tuple of 2 positive integers')
-        else:
-            self.__position = value  #: position of the square
+        setter for position
+        """
+        if type(value) is not tuple or len(value) != 2:
+            raise TypeError("position must be a tuple of 2 positive integers")
+        if type(value[0]) is not int or type(value[1]) is not int:
+            raise TypeError("position must be a tuple of 2 positive integers")
+        if value[0] < 0 or value[1] < 0:
+            raise TypeError("position must be a tuple of 2 positive integers")
 
-    @size.setter
-    def size(self, value):
-        """Sets value into size, must be int.
-        Args:
-            value (int): size of the square.
-        """
-        if type(value) is not int:
-            raise TypeError('size must be an integer')
-        elif value < 0:
-            raise ValueError('size must be >= 0')
-        else:
-            self.__size = value  #: size of the square
+        self.__position = value
 
     def area(self):
-        """returns the area
-        Returns:
-            area.
         """
-        return self.__size**2
+        Returns the area of a square
+        """
+        return (self.__size * self.__size)
 
     def my_print(self):
-        """prints in stdout the square with the character #"""
-
-        if self.__size != 0:
-            for k in range(self.__position[1]):
-                print()
-            for i in range(self.__size):
-                if (self.__position[0] != 0):
-                    for l in range(self.__position[0]):
-                        print(' ', end='')
-                for j in range(self.__size):
-                    print('#', end='')
-                print()
-        else:
+        """
+        prints the square
+        """
+        if self.__size == 0:
             print()
+            return
+        print("\n" * self.__position[1], end="")
+        print("\n".join([" " * self.__position[0] + "#" * self.__size
+                         for each in range(self.__size)]))
 
     def __str__(self):
-        str_square = []
-
-        if self.__size != 0:
-            for k in range(self.__position[1]):
-                str_square.append('\n')
-            for i in range(self.__size):
-                if (self.__position[0] != 0):
-                    for l in range(self.__position[0]):
-                        str_square.append(' ')
-                for j in range(self.__size):
-                    str_square.append('#')
-                if (i < self.__size - 1):
-                    str_square.append('\n')
-        return ''.join(str_square)
+        """
+        same behaviour as my_print
+        """
+        s = ""
+        if self.__size == 0:
+            return s
+        s = "\n" * self.__position[1]
+        s += "\n".join([" " * self.__position[0] + "#" * self.__size
+                        for each in range(self.__size)])
+        return s
