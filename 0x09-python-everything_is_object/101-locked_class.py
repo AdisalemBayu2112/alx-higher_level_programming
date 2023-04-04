@@ -1,7 +1,11 @@
 #!/usr/bin/python3
-""" LockedClass
+"""
+Module 101-locked_class.py
 """
 
 
 class LockedClass:
-    __slots__ = ['first_name']
+    """
+    class Locked Class, no class or object attribute
+    """
+    __slots__ = "first_name"
