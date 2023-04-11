@@ -17,7 +17,6 @@ if __name__ == "__main__":
 
     nbline = 1
     try:
-        """ Input format: <IP Address> - [<date>] "GET /projects/260 HTTP/1.1" <status code> <file size> """
         for line in sys.stdin:
             try:
                 linetok = line.split(" ")
@@ -25,8 +24,8 @@ if __name__ == "__main__":
                 if stat in statdict:
                     statdict[stat] += 1
                     size += int(linetok[-1])
-            except:
-                pass
+            except
+            pass
 
             if nbline % 10 == 0:
                 displaystat(size, statdict)
