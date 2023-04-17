@@ -140,4 +140,3 @@ class Base:
                 return [cls.create(**argument) for argument in dict_list]
         except IOError:
             return []
-
