@@ -1,26 +1,28 @@
 #!/usr/bin/python3
-# List all states with a name starting with uppercase N
-# Username, password, and database names are given as user args
-import sys
-import MySQLdb
-
+"""
+lists all states with a name starting with N (upper N)
+from the database hbtn_0e_0_usa
+"""
 if __name__ == "__main__":
-    db = MySQLdb.connect(user=sys.argv[1],
-                         passwd=sys.argv[2],
-                         db=sys.argv[3],
-                         host='localhost',
-                         port=3306)
-    cur = db.cursor()
-    cmd = """SELECT id, name
-             FROM states
-             WHERE name LIKE 'N%'
-             ORDER BY id ASC;"""
-    cur.execute(cmd)
-    nStates = cur.fetchall()
+    import MySQLdb
+    from sys import argv
 
-    for state in nStates:
-        if (state[1][0] == 'N'):
-            print(state)
+    usrName = argv[1]
+    pssWd = argv[2]
+    dbName = argv[3]
 
+    conn = MySQLdb.connect(host="localhost", user=usrName,
+                           passwd=pssWd, db=dbName, port=3306,
+                           charset="utf8")
+
+    query = "SELECT id, name FROM states WHERE name LIKE BINARY 'N%'\
+        ORDER BY states.id ASC;"
+
+    cur = conn.cursor()
+    cur.execute(query)
+    query_rows = cur.fetchall()
+    for row in query_rows:
+        print(row)
     cur.close()
-    db.close()
+    conn.close()
+
