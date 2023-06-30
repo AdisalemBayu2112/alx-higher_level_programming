@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 """
-Gets the body of response with requests library
+Use requests package to make a get request to given URL and display
+the value of `X-Request-Id` in response header.
 """
-import requests
 import sys
-
+import requests
 
 if __name__ == "__main__":
-    req = requests.get(sys.argv[1])
-    print(req.text)
+    url = sys.argv[1]
+    r = requests.get(url)
+    print(r.headers['x-request-id'])

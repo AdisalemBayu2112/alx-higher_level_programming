@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-"""
-Does stuff
-"""
+# Use requests package to make a get request to given URL
 import requests
-import sys
-
 
 if __name__ == "__main__":
-    print("hello")
+    url = "https://intranet.hbtn.io/status"
+    r = requests.get(url)
+    print("Body response:")
+    print("\t- type: {}".format(type(r.text)))
+    print("\t- content: {}".format(r.text)))
