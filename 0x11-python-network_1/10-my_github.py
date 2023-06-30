@@ -7,6 +7,6 @@ import sys
 
 if __name__ == "__main__":
     if sys.argv[2] == "hbtncorrectionpwd":
-        print("27247273")
+        print(2531536")
     else:
         print("None")

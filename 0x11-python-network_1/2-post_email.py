@@ -1,13 +1,16 @@
 #!/usr/bin/python3
 """
-Post some headers
+Take in a URL and email, send POST request, and display body of response
+decoded in utf-8
 """
-import urllib.request
 import sys
-
+import urllib.request
+import urllib.parse
 
 if __name__ == "__main__":
-    data = urllib.parse.urlencode({'email': sys.argv[2]}).encode('utf-8')
-    req = urllib.request.Request(sys.argv[1])
-    with urllib.request.urlopen(req) as response:
-        print(response.read())
+    values = {'email': sys.argv[2]}
+    data = urllib.parse.urlencode(values)
+    data = data.encode('utf-8')
+    req = urllib.request.Request(sys.argv[1], data)
+    with urllib.request.urlopen(req) as res:
+        print(res.read().decode('utf-8'))
